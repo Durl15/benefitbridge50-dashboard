@@ -9,12 +9,17 @@ export default function Landing() {
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    const leads = JSON.parse(localStorage.getItem("bb50_leads") || "[]");
-    leads.push({ email, date: new Date().toISOString() });
-    localStorage.setItem("bb50_leads", JSON.stringify(leads));
-    await new Promise(r => setTimeout(r, 600));
-    setSubmitted(true);
-    setSubmitting(false);
+    try {
+      const res = await fetch("/.netlify/functions/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (data.success) { setSubmitted(true); }
+      else { alert(data.error || "Something went wrong. Please try again."); }
+    } catch { alert("Network error. Please try again."); }
+    finally { setSubmitting(false); }
   };
 
   const stats = [
@@ -24,14 +29,14 @@ export default function Landing() {
   ];
 
   const steps = [
-    { icon: "📋", title: "Answer 10 questions", desc: "Tell us your age, income, location, and situation. Takes under 3 minutes." },
-    { icon: "🤖", title: "AI screens your eligibility", desc: "Our system checks hundreds of federal, state, and local programs instantly." },
-    { icon: "✅", title: "Get your matched benefits", desc: "See exactly which programs you likely qualify for, with next steps to apply." },
+    { icon: "Ã°Å¸â€œâ€¹", title: "Answer 10 questions", desc: "Tell us your age, income, location, and situation. Takes under 3 minutes." },
+    { icon: "Ã°Å¸Â¤â€“", title: "AI screens your eligibility", desc: "Our system checks hundreds of federal, state, and local programs instantly." },
+    { icon: "Ã¢Å“â€¦", title: "Get your matched benefits", desc: "See exactly which programs you likely qualify for, with next steps to apply." },
   ];
 
   const testimonials = [
-    { quote: "I had no idea I qualified for SNAP and LIHEAP. This saved me over $400 a month.", name: "Margaret T., 71 — Florida" },
-    { quote: "Found out I was eligible for Medicare Extra Help. My prescription costs dropped to almost nothing.", name: "Robert K., 68 — Ohio" },
+    { quote: "I had no idea I qualified for SNAP and LIHEAP. This saved me over $400 a month.", name: "Margaret T., 71 Ã¢â‚¬â€ Florida" },
+    { quote: "Found out I was eligible for Medicare Extra Help. My prescription costs dropped to almost nothing.", name: "Robert K., 68 Ã¢â‚¬â€ Ohio" },
     { quote: "My social worker uses this with every client. It finds things we used to miss.", name: "Case Manager, NY Area Agency on Aging" },
   ];
 
@@ -39,7 +44,7 @@ export default function Landing() {
     <div style={{ fontFamily: "system-ui, sans-serif", color: "#1a1a2e", background: "white" }}>
       <nav style={{ background: "#0F2044", padding: "0 2rem", height: "60px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <span style={{ fontSize: "22px" }}>🌉</span>
+          <span style={{ fontSize: "22px" }}>Ã°Å¸Å’â€°</span>
           <span style={{ color: "white", fontWeight: "700", fontSize: "17px" }}>BenefitBridge 50+</span>
         </div>
         <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
@@ -47,7 +52,7 @@ export default function Landing() {
           <a href="#partners" style={{ color: "rgba(255,255,255,0.75)", fontSize: "14px", textDecoration: "none" }}>For Organizations</a>
           <Link href="/screen">
             <span style={{ background: "#F59E0B", color: "#0F2044", padding: "8px 18px", borderRadius: "6px", fontWeight: "700", fontSize: "14px", cursor: "pointer" }}>
-              Check My Benefits →
+              Check My Benefits Ã¢â€ â€™
             </span>
           </Link>
         </div>
@@ -56,19 +61,19 @@ export default function Landing() {
       <section style={{ background: "linear-gradient(135deg, #0F2044 0%, #162B52 60%, #1e3a6e 100%)", color: "white", padding: "80px 2rem 100px", textAlign: "center" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto" }}>
           <div style={{ display: "inline-block", background: "rgba(245,158,11,0.15)", border: "1px solid rgba(245,158,11,0.4)", color: "#FCD34D", padding: "6px 16px", borderRadius: "20px", fontSize: "13px", fontWeight: "600", marginBottom: "24px" }}>
-            Free · No account required · AI-powered
+            Free Ã‚Â· No account required Ã‚Â· AI-powered
           </div>
           <h1 style={{ fontSize: "clamp(32px, 5vw, 52px)", fontWeight: "800", lineHeight: 1.15, marginBottom: "20px" }}>
             Find the benefits you are  
 
-            <span style={{ color: "#F59E0B" }}>entitled to — in 3 minutes</span>
+            <span style={{ color: "#F59E0B" }}>entitled to Ã¢â‚¬â€ in 3 minutes</span>
           </h1>
           <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.8)", lineHeight: 1.6, marginBottom: "36px", maxWidth: "560px", margin: "0 auto 36px" }}>
             Millions of Americans 50+ are missing out on SNAP, Medicare savings, utility assistance, and hundreds of other programs. BenefitBridge screens your eligibility instantly.
           </p>
           <Link href="/screen">
             <button style={{ background: "#F59E0B", color: "#0F2044", padding: "16px 40px", borderRadius: "8px", border: "none", fontWeight: "800", fontSize: "18px", cursor: "pointer", boxShadow: "0 4px 20px rgba(245,158,11,0.4)" }}>
-              Screen for Benefits — It is Free →
+              Screen for Benefits Ã¢â‚¬â€ It is Free Ã¢â€ â€™
             </button>
           </Link>
           <p style={{ marginTop: "16px", fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>No signup. No personal data stored. Results in under 3 minutes.</p>
@@ -102,7 +107,7 @@ export default function Landing() {
           <div style={{ marginTop: "48px" }}>
             <Link href="/screen">
               <button style={{ background: "#0F2044", color: "white", padding: "14px 36px", borderRadius: "8px", border: "none", fontWeight: "700", fontSize: "16px", cursor: "pointer" }}>
-                Start My Free Screening →
+                Start My Free Screening Ã¢â€ â€™
               </button>
             </Link>
           </div>
@@ -116,7 +121,7 @@ export default function Landing() {
             {testimonials.map((t, i) => (
               <div key={i} style={{ background: "white", borderRadius: "12px", padding: "24px", boxShadow: "0 2px 12px rgba(0,0,0,0.06)", borderTop: "3px solid #F59E0B" }}>
                 <p style={{ fontSize: "14px", color: "#374151", lineHeight: 1.7, marginBottom: "16px", fontStyle: "italic" }}>"{t.quote}"</p>
-                <div style={{ fontSize: "13px", fontWeight: "600", color: "#6B7280" }}>— {t.name}</div>
+                <div style={{ fontSize: "13px", fontWeight: "600", color: "#6B7280" }}>Ã¢â‚¬â€ {t.name}</div>
               </div>
             ))}
           </div>
@@ -134,7 +139,7 @@ export default function Landing() {
           ) : (
             <form onSubmit={handleEmailSubmit} style={{ display: "flex", gap: "12px", maxWidth: "440px", margin: "0 auto" }}>
               <input type="email" value={email} onChange={e=>setEmail(e.target.value)} required placeholder="your@email.com"
-                style={{ flex: 1, padding: "12px 16px", borderRadius: "8px", border: "none", fontSize: "15px" }} />
+                style={{ flex: 1, padding: "12px 16px", borderRadius: "8px", border: "none", fontSize: "15px", color: "#111827", background: "white" }} />
               <button type="submit" disabled={submitting}
                 style={{ background: "#F59E0B", color: "#0F2044", padding: "12px 24px", borderRadius: "8px", border: "none", fontWeight: "700", fontSize: "15px", cursor: "pointer", whiteSpace: "nowrap" }}>
                 {submitting ? "..." : "Notify Me"}
@@ -154,22 +159,22 @@ export default function Landing() {
             <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px 0" }}>
               {["Embed on your website","Export results to CSV","Custom branding","Bulk screening for case managers"].map((f,i)=>(
                 <li key={i} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", fontSize: "14px", color: "#374151" }}>
-                  <span style={{ color: "#059669", fontWeight: "700" }}>✓</span> {f}
+                  <span style={{ color: "#059669", fontWeight: "700" }}>Ã¢Å“â€œ</span> {f}
                 </li>
               ))}
             </ul>
             <a href="mailto:contact@benefitbridge50.com" style={{ display: "inline-block", background: "#0F2044", color: "white", padding: "12px 28px", borderRadius: "8px", textDecoration: "none", fontWeight: "700", fontSize: "14px" }}>
-              Contact Us About Partnerships →
+              Contact Us About Partnerships Ã¢â€ â€™
             </a>
           </div>
           <div style={{ background: "#F9FAFB", borderRadius: "16px", padding: "32px", textAlign: "center" }}>
-            <div style={{ fontSize: "48px", marginBottom: "16px" }}>🏥</div>
+            <div style={{ fontSize: "48px", marginBottom: "16px" }}>Ã°Å¸ÂÂ¥</div>
             <div style={{ fontWeight: "700", fontSize: "18px", color: "#0F2044", marginBottom: "8px" }}>Partner Pricing</div>
             <div style={{ fontSize: "13px", color: "#6B7280", marginBottom: "24px" }}>Starting at $99/month</div>
             {[["Unlimited screenings",true],["White-label branding",true],["CSV export",true],["API access",false],["Dedicated support",false]].map(([f,inc],i)=>(
               <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: i<4?"1px solid #E5E7EB":"none", fontSize: "14px" }}>
                 <span style={{ color: "#374151" }}>{f}</span>
-                <span style={{ color: inc?"#059669":"#D1D5DB", fontWeight: "600" }}>{inc?"✓":"—"}</span>
+                <span style={{ color: inc?"#059669":"#D1D5DB", fontWeight: "600" }}>{inc?"Ã¢Å“â€œ":"Ã¢â‚¬â€"}</span>
               </div>
             ))}
           </div>
@@ -181,18 +186,18 @@ export default function Landing() {
         <p style={{ color: "#6B7280", marginBottom: "28px", fontSize: "15px" }}>Free. Private. Takes 3 minutes.</p>
         <Link href="/screen">
           <button style={{ background: "#F59E0B", color: "#0F2044", padding: "14px 36px", borderRadius: "8px", border: "none", fontWeight: "800", fontSize: "16px", cursor: "pointer" }}>
-            Screen for Benefits Now →
+            Screen for Benefits Now Ã¢â€ â€™
           </button>
         </Link>
       </section>
 
       <footer style={{ background: "#0F2044", color: "rgba(255,255,255,0.5)", padding: "24px 2rem", textAlign: "center", fontSize: "13px" }}>
         <div style={{ marginBottom: "8px" }}>
-          <span style={{ marginRight: "24px" }}>🌉 BenefitBridge 50+</span>
+          <span style={{ marginRight: "24px" }}>Ã°Å¸Å’â€° BenefitBridge 50+</span>
           <a href="mailto:contact@benefitbridge50.com" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none", marginRight: "24px" }}>contact@benefitbridge50.com</a>
           <Link href="/screen"><span style={{ color: "rgba(255,255,255,0.5)", cursor: "pointer" }}>Screener</span></Link>
         </div>
-        <div>2026 BenefitBridge 50+. Screening tool only — not a guarantee of eligibility.</div>
+        <div>2026 BenefitBridge 50+. Screening tool only Ã¢â‚¬â€ not a guarantee of eligibility.</div>
       </footer>
     </div>
   );
