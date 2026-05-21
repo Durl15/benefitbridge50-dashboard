@@ -9,7 +9,7 @@ export default function Admin( ) {
   const [sortBy, setSortBy] = useState("created_at");
   const [sortDir, setSortDir] = useState("desc");
   useEffect(() => {
-    fetch(`${API}/api/assessments?limit=500`).then(r=>r.json()).then(data=>{setAssessments(Array.isArray(data)?data:[]);setLoading(false);}).catch(()=>{setError("Could not load data.");setLoading(false);});
+    fetch("/.netlify/functions/assessments").then(r=>r.json()).then(data=>{setAssessments(Array.isArray(data)?data:[]);setLoading(false);}).catch(()=>{setError("Could not load data.");setLoading(false);});
   }, []);
   const filtered = assessments.filter(a=>{const q=search.toLowerCase();return !q||a.state?.toLowerCase().includes(q)||a.county?.toLowerCase().includes(q)||a.assessment_id?.toLowerCase().includes(q);}).sort((a,b)=>{let av=a[sortBy],bv=b[sortBy];if(sortBy==="created_at"){av=new Date(av).getTime();bv=new Date(bv).getTime();}if(sortBy==="state"){av=av||"";bv=bv||"";return sortDir==="asc"?av.localeCompare(bv):bv.localeCompare(av);}return sortDir==="asc"?av-bv:bv-av;});
   const totalMatches=assessments.reduce((s,a)=>s+(a.match_count||0),0);
@@ -43,19 +43,19 @@ export default function Admin( ) {
             <div style={{overflowX:"auto"}}>
               <table style={{width:"100%",borderCollapse:"collapse"}}>
                 <thead><tr>
-                  <th style={th} onClick={()=>toggleSort("created_at")}>Date {sortBy==="created_at"?(sortDir==="desc"?"↓":"↑"):""}</th>
-                  <th style={th} onClick={()=>toggleSort("state")}>State {sortBy==="state"?(sortDir==="desc"?"↓":"↑"):""}</th>
+                  <th style={th} onClick={()=>toggleSort("created_at")}>Date {sortBy==="created_at"?(sortDir==="desc"?"â†“":"â†‘"):""}</th>
+                  <th style={th} onClick={()=>toggleSort("state")}>State {sortBy==="state"?(sortDir==="desc"?"â†“":"â†‘"):""}</th>
                   <th style={th}>County</th>
-                  <th style={th} onClick={()=>toggleSort("match_count")}>Matches {sortBy==="match_count"?(sortDir==="desc"?"↓":"↑"):""}</th>
+                  <th style={th} onClick={()=>toggleSort("match_count")}>Matches {sortBy==="match_count"?(sortDir==="desc"?"â†“":"â†‘"):""}</th>
                   <th style={th}>Risk Flags</th>
                   <th style={th}>ID</th>
                 </tr></thead>
                 <tbody>{filtered.map((a,i)=>(<tr key={a.assessment_id} style={{background:i%2===0?"white":"#FAFAFA"}}>
                   <td style={td}>{new Date(a.created_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit"})}</td>
-                  <td style={td}><span style={{background:"#EFF6FF",color:"#1D4ED8",padding:"2px 10px",borderRadius:"20px",fontSize:"12px",fontWeight:"600"}}>{a.state||"—"}</span></td>
-                  <td style={td}>{a.county||"—"}</td>
+                  <td style={td}><span style={{background:"#EFF6FF",color:"#1D4ED8",padding:"2px 10px",borderRadius:"20px",fontSize:"12px",fontWeight:"600"}}>{a.state||"â€”"}</span></td>
+                  <td style={td}>{a.county||"â€”"}</td>
                   <td style={td}><span style={{background:"#F0FDF4",color:"#059669",padding:"2px 10px",borderRadius:"20px",fontSize:"12px",fontWeight:"700"}}>{a.match_count??0}</span></td>
-                  <td style={td}>{(a.risk_flag_count??0)>0?<span style={{background:"#FEF2F2",color:"#DC2626",padding:"2px 10px",borderRadius:"20px",fontSize:"12px",fontWeight:"700"}}>{a.risk_flag_count}</span>:<span style={{color:"#9CA3AF",fontSize:"12px"}}>—</span>}</td>
+                  <td style={td}>{(a.risk_flag_count??0)>0?<span style={{background:"#FEF2F2",color:"#DC2626",padding:"2px 10px",borderRadius:"20px",fontSize:"12px",fontWeight:"700"}}>{a.risk_flag_count}</span>:<span style={{color:"#9CA3AF",fontSize:"12px"}}>â€”</span>}</td>
                   <td style={{...td,fontFamily:"monospace",fontSize:"11px",color:"#9CA3AF"}}>{a.assessment_id.slice(0,8)}...</td>
                 </tr>))}</tbody>
               </table>
