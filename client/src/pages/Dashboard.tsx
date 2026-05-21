@@ -149,7 +149,7 @@ export default function Dashboard( ) {
                   <div key={i} style={{background:"white",padding:"20px",borderRadius:"12px",boxShadow:"0 2px 12px rgba(0,0,0,0.06)"}}>
                     <div style={{fontWeight:"700",fontSize:"15px",color:"#0F2044",marginBottom:"8px"}}>{r.name || r.title}</div>
                     <div style={{fontSize:"13px",color:"#6B7280"}}>{r.description}</div>
-                    {r.url && <a href={r.url} target="_blank" rel="noopener noreferrer" style={{display:"inline-block",marginTop:"12px",fontSize:"13px",color:"#3B82F6"}}>Learn more →</a>}
+                    {r.url && <a href={r.url} target="_blank" rel="noopener noreferrer" style={{display:"inline-block",marginTop:"12px",fontSize:"13px",color:"#3B82F6"}}>Learn more â†’</a>}
                   </div>
                 ))}
               </div>
@@ -190,7 +190,7 @@ export default function Dashboard( ) {
               ].map((item,i,arr )=>(
                 <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 0",borderBottom:i<arr.length-1?"1px solid #F3F4F6":"none"}}>
                   <div><div style={{fontWeight:"500",fontSize:"14px",color:"#0F2044"}}>{item.label}</div><a href={item.url} target="_blank" rel="noopener noreferrer" style={{fontSize:"12px",color:"#3B82F6"}}>{item.url}</a></div>
-                  <span style={{fontSize:"12px",fontWeight:"600",color:item.live?"#059669":"#EF4444"}}>{item.live?"✓ Live":"✗ Offline"}</span>
+                  <span style={{fontSize:"12px",fontWeight:"600",color:item.live?"#059669":"#EF4444"}}>{item.live?"âœ“ Live":"âœ— Offline"}</span>
                 </div>
               ))}
             </div>
