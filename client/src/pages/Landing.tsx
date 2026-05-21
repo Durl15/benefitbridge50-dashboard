@@ -48,7 +48,7 @@ export default function Landing() {
         </div>
         <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
           <a href="#how-it-works" style={{ color: "rgba(255,255,255,0.75)", fontSize: "14px", textDecoration: "none" }}>How it works</a>
-          <a href="#partners" style={{ color: "rgba(255,255,255,0.75)", fontSize: "14px", textDecoration: "none" }}>For Organizations</a>
+          <a href="/partners" style={{ color: "rgba(255,255,255,0.75)", fontSize: "14px", textDecoration: "none" }}>For Organizations</a>
           <Link href="/screen"><span style={{ background: "#F59E0B", color: "#0F2044", padding: "8px 18px", borderRadius: "6px", fontWeight: "700", fontSize: "14px", cursor: "pointer" }}>Check My Benefits</span></Link>
         </div>
       </nav>
