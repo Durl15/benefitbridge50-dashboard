@@ -77,8 +77,89 @@ export default function Partners() {
           </div>
         </div>
       </section>
+      <section style={{ padding: "72px 2rem", background: "white" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", textAlign: "center", marginBottom: "12px" }}>See it in action</h2>
+          <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>Watch how BenefitBridge screens a client in under 3 minutes</p>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+            <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }} src="https://player.vimeo.com/video/1194406944" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section>
 
-      <section id="contact" style={{ padding: "72px 2rem", background: "white" }}>
+      <section style={{ padding: "72px 2rem", background: "white" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", textAlign: "center", marginBottom: "12px" }}>See it in action</h2>
+          <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>Watch how BenefitBridge screens a client in under 3 minutes</p>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+            <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }} src="https://player.vimeo.com/video/1194406944" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ padding: "72px 2rem", background: "white" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", textAlign: "center", marginBottom: "12px" }}>See it in action</h2>
+          <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>Watch how BenefitBridge screens a client in under 3 minutes</p>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+            <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }} src="https://player.vimeo.com/video/1194406944" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section> 
+      <section style={{ padding: "72px 2rem", background: "white" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", textAlign: "center", marginBottom: "12px" }}>See it in action</h2>
+          <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>Watch how BenefitBridge screens a client in under 3 minutes</p>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+            <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }} src="https://player.vimeo.com/video/1194406944" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section> 
+      <section style={{ padding: "72px 2rem", background: "white" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", textAlign: "center", marginBottom: "12px" }}>See it in action</h2>
+          <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>Watch how BenefitBridge screens a client in under 3 minutes</p>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+            <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }} src="https://player.vimeo.com/video/1194406944" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section> 
+      <section style={{ padding: "72px 2rem", background: "white" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", textAlign: "center", marginBottom: "12px" }}>See it in action</h2>
+          <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>Watch how BenefitBridge screens a client in under 3 minutes</p>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+            <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }} src="https://player.vimeo.com/video/1194406944" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section> 
+      <section style={{ padding: "72px 2rem", background: "white" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", textAlign: "center", marginBottom: "12px" }}>See it in action</h2>
+          <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>Watch how BenefitBridge screens a client in under 3 minutes</p>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+            <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }} src="https://player.vimeo.com/video/1194406944" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section> 
+      <section style={{ padding: "72px 2rem", background: "white" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", textAlign: "center", marginBottom: "12px" }}>See it in action</h2>
+          <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>Watch how BenefitBridge screens a client in under 3 minutes</p>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+            <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }} src="https://player.vimeo.com/video/1194406944" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section> 
+      <section style={{ padding: "72px 2rem", background: "white" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", textAlign: "center", marginBottom: "12px" }}>See it in action</h2>
+          <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>Watch how BenefitBridge screens a client in under 3 minutes</p>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
+            <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }} src="https://player.vimeo.com/video/1194406944" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section><section id="contact" style={{ padding: "72px 2rem", background: "white" }}>
         <div style={{ maxWidth: "640px", margin: "0 auto" }}>
           <h2 style={{ fontSize: "28px", fontWeight: "800", color: "#0F2044", marginBottom: "8px", textAlign: "center" }}>Request a free demo</h2>
           <p style={{ color: "#6B7280", textAlign: "center", marginBottom: "40px", fontSize: "15px" }}>We will reach out within 1 business day to schedule a 20-minute walkthrough.</p>
