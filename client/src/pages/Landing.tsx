@@ -56,7 +56,7 @@ export default function Landing() {
       <section style={{ background: "linear-gradient(135deg, #0F2044 0%, #162B52 60%, #1e3a6e 100%)", color: "white", padding: "80px 2rem 100px", textAlign: "center" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto" }}>
           <div style={{ display: "inline-block", background: "rgba(245,158,11,0.15)", border: "1px solid rgba(245,158,11,0.4)", color: "#FCD34D", padding: "6px 16px", borderRadius: "20px", fontSize: "13px", fontWeight: "600", marginBottom: "24px" }}>Free - No account required - AI-powered</div>
-          <h1 style={{ fontSize: "clamp(32px, 5vw, 52px)", fontWeight: "800", lineHeight: 1.15, marginBottom: "20px" }}>Find the benefits you are  
+          <h1 style={{ fontSize: "clamp(32px, 5vw, 52px)", fontWeight: "800", lineHeight: 1.15, marginBottom: "20px" }}>Find the benefits you are   
 <span style={{ color: "#F59E0B" }}>entitled to in 3 minutes</span></h1>
           <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.8)", lineHeight: 1.6, maxWidth: "560px", margin: "0 auto 36px" }}>Millions of Americans 50+ are missing out on SNAP, Medicare savings, utility assistance, and hundreds of other programs. BenefitBridge screens your eligibility instantly.</p>
           <Link href="/screen"><button style={{ background: "#F59E0B", color: "#0F2044", padding: "16px 40px", borderRadius: "8px", border: "none", fontWeight: "800", fontSize: "18px", cursor: "pointer", boxShadow: "0 4px 20px rgba(245,158,11,0.4)" }}>Screen for Benefits - It is Free</button></Link>
