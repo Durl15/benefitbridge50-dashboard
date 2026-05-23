@@ -1,6 +1,6 @@
 exports.handler = async (event) => {
   const body = JSON.parse(event.body);
-  const res = await fetch("https://web-production-26d78.up.railway.app/api/screen", {
+  const res = await fetch("https://web-production-26d78.up.railway.app/api/assessments", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body ),
