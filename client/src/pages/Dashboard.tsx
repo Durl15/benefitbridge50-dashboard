@@ -24,7 +24,7 @@ export default function Dashboard( ) {
 
   useEffect(() => {
     fetch(`${API}/health`).then(r=>r.json()).then(()=>setApiStatus("ok")).catch(()=>setApiStatus("error"));
-    fetch(`${API}/api/resources`).then(r=>r.json()).then(setResources).catch(()=>{});
+    fetch("/.netlify/functions/resources").then(r=>r.json()).then(setResources).catch(()=>{});
     fetch(`${API}/api/assessments`).then(r=>r.json()).then(setAssessments).catch(()=>{});
   }, []);
 
@@ -71,11 +71,11 @@ export default function Dashboard( ) {
   };
 
   const nav = [
-    { id: "screener", label: "Benefit Screener", icon: "🔍" },
-    { id: "results", label: "Results", icon: "✅", hidden: !screening },
-    { id: "resources", label: "Resources", icon: "📚" },
-    { id: "history", label: "Assessments", icon: "📋" },
-    { id: "status", label: "System Status", icon: "⚡" },
+    { id: "screener", label: "Benefit Screener", icon: "ðŸ”" },
+    { id: "results", label: "Results", icon: "âœ…", hidden: !screening },
+    { id: "resources", label: "Resources", icon: "ðŸ“š" },
+    { id: "history", label: "Assessments", icon: "ðŸ“‹" },
+    { id: "status", label: "System Status", icon: "âš¡" },
   ];
 
   const inpStyle = { width: "100%", padding: "8px 12px", border: "1px solid #D1D5DB", borderRadius: "6px", fontSize: "14px", boxSizing: "border-box" };
@@ -86,12 +86,12 @@ export default function Dashboard( ) {
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "system-ui, sans-serif", background: "#f8f9fb" }}>
       <header style={{ background: "#0F2044", color: "white", padding: "0 2rem", height: "60px", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <span style={{ fontSize: "24px" }}>🌉</span>
+          <span style={{ fontSize: "24px" }}>ðŸŒ‰</span>
           <strong style={{ fontSize: "18px" }}>BenefitBridge 50+</strong>
           <span style={{ opacity: 0.5, fontSize: "12px" }}>Live Dashboard</span>
         </div>
         <span style={{ fontSize: "12px", color: apiStatus === "ok" ? "#6EE7B7" : apiStatus === "error" ? "#FCA5A5" : "#FCD34D" }}>
-          {apiStatus === "ok" ? "✓ API Live" : apiStatus === "error" ? "✗ API Offline" : "⟳ Checking..."}
+          {apiStatus === "ok" ? "âœ“ API Live" : apiStatus === "error" ? "âœ— API Offline" : "âŸ³ Checking..."}
         </span>
       </header>
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
@@ -155,7 +155,7 @@ export default function Dashboard( ) {
                   ))}
                 </div>
                 <div style={{ marginBottom: "16px", padding: "12px", background: "#FEF3C7", borderRadius: "8px", fontSize: "13px", color: "#92400E" }}>
-                  ⚠️ Screening tool only. Results are not a guarantee of eligibility.
+                  âš ï¸ Screening tool only. Results are not a guarantee of eligibility.
                 </div>
                 <label style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", color: "#374151", cursor: "pointer" }}>
                   <input type="checkbox" checked={form.consent_to_process} onChange={e=>sf("consent_to_process",e.target.checked)} style={{ width: "16px", height: "16px" }} />
@@ -164,7 +164,7 @@ export default function Dashboard( ) {
                 {error && <div style={{ marginTop: "12px", padding: "12px", background: "#FEF2F2", color: "#DC2626", borderRadius: "6px", fontSize: "13px" }}>{error}</div>}
                 <button type="submit" disabled={submitting}
                   style={{ marginTop: "20px", background: submitting ? "#9CA3AF" : "#0F2044", color: "white", padding: "10px 28px", borderRadius: "8px", border: "none", fontWeight: "600", cursor: submitting ? "not-allowed" : "pointer", fontSize: "15px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  {submitting ? "Screening…" : "Screen for Benefits →"}
+                  {submitting ? "Screeningâ€¦" : "Screen for Benefits â†’"}
                 </button>
               </form>
             </div>
@@ -176,7 +176,7 @@ export default function Dashboard( ) {
               <p style={{ color: "#6B7280", fontSize: "14px", marginBottom: "24px" }}>{screening.matches?.length || 0} benefit programs matched</p>
               {(screening.risk_flags || []).length > 0 && (
                 <div style={{ background: "#FEF2F2", border: "1px solid #FECACA", borderRadius: "10px", padding: "12px 16px", marginBottom: "16px" }}>
-                  <strong style={{ color: "#991B1B", fontSize: "14px" }}>⚠️ Fraud Risk Flags</strong>
+                  <strong style={{ color: "#991B1B", fontSize: "14px" }}>âš ï¸ Fraud Risk Flags</strong>
                   <ul style={{ margin: "8px 0 0 0", paddingLeft: "20px", fontSize: "13px", color: "#7F1D1D" }}>
                     {screening.risk_flags.map((f, i) => <li key={i}>{f}</li>)}
                   </ul>
@@ -202,14 +202,14 @@ export default function Dashboard( ) {
                       </ul>
                     </div>
                   )}
-                  {m.official_url && <a href={m.official_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: "8px", fontSize: "12px", color: "#2563EB" }}>Official site ↗</a>}
+                  {m.official_url && <a href={m.official_url} target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", marginTop: "8px", fontSize: "12px", color: "#2563EB" }}>Official site â†—</a>}
                 </div>
               ))}
               {(!screening.matches || !screening.matches.length) && <p style={{ color: "#9CA3AF" }}>No programs matched.</p>}
               <p style={{ fontSize: "12px", color: "#9CA3AF", marginTop: "16px" }}>{screening.disclaimer}</p>
               <button onClick={() => { setScreening(null); setForm({ ...defaultForm }); setActiveNav("screener"); }}
                 style={{ marginTop: "16px", background: "transparent", border: "1px solid #D1D5DB", color: "#374151", padding: "8px 20px", borderRadius: "8px", cursor: "pointer", fontSize: "14px" }}>
-                ← New Screening
+                â† New Screening
               </button>
             </div>
           )}
@@ -222,10 +222,10 @@ export default function Dashboard( ) {
                 <div key={i} style={{ background: "white", borderRadius: "10px", padding: "12px 16px", marginBottom: "8px", boxShadow: "0 1px 6px rgba(0,0,0,0.06)", display: "flex", alignItems: "center", gap: "12px", maxWidth: "700px" }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: "600", fontSize: "14px", color: "#0F2044" }}>{r.program_name}</div>
-                    <div style={{ fontSize: "12px", color: "#9CA3AF" }}>{r.category} · {r.state}</div>
+                    <div style={{ fontSize: "12px", color: "#9CA3AF" }}>{r.category} Â· {r.state}</div>
                     <div style={{ fontSize: "12px", color: "#6B7280", marginTop: "2px" }}>{r.description}</div>
                   </div>
-                  {r.official_url && <a href={r.official_url} target="_blank" rel="noopener noreferrer" style={{ color: "#F59E0B", fontSize: "18px", textDecoration: "none" }}>↗</a>}
+                  {r.official_url && <a href={r.official_url} target="_blank" rel="noopener noreferrer" style={{ color: "#F59E0B", fontSize: "18px", textDecoration: "none" }}>â†—</a>}
                 </div>
               ))}
             </div>
@@ -240,7 +240,7 @@ export default function Dashboard( ) {
                 <div key={a.assessment_id || i} style={{ background: "white", borderRadius: "10px", padding: "12px 16px", marginBottom: "8px", boxShadow: "0 1px 6px rgba(0,0,0,0.06)", maxWidth: "700px" }}>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span style={{ fontWeight: "600", fontSize: "14px", color: "#0F2044" }}>
-                      {a.state || "—"}{a.county ? ` · ${a.county}` : ""}
+                      {a.state || "â€”"}{a.county ? ` Â· ${a.county}` : ""}
                     </span>
                     <span style={{ background: "#EFF6FF", color: "#1D4ED8", padding: "2px 10px", borderRadius: "20px", fontSize: "12px", fontWeight: "600" }}>
                       {a.match_count ?? 0} programs
@@ -267,7 +267,7 @@ export default function Dashboard( ) {
                       <div style={{ fontWeight: "500", fontSize: "14px", color: "#0F2044" }}>{item.label}</div>
                       <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "12px", color: "#3B82F6" }}>{item.url}</a>
                     </div>
-                    <span style={{ fontSize: "12px", fontWeight: "600", color: item.live ? "#059669" : "#EF4444" }}>{item.live ? "✓ Live" : "✗ Offline"}</span>
+                    <span style={{ fontSize: "12px", fontWeight: "600", color: item.live ? "#059669" : "#EF4444" }}>{item.live ? "âœ“ Live" : "âœ— Offline"}</span>
                   </div>
                 ))}
               </div>
