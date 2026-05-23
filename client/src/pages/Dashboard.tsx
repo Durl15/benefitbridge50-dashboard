@@ -110,7 +110,7 @@ export default function Dashboard() {
                 </label>
                 {error && <div style={{ color: "#DC2626", fontSize: "14px" }}>{error}</div>}
                 <button type="submit" disabled={submitting} style={{ background: "#0F2044", color: "white", padding: "12px", borderRadius: "6px", border: "none", fontWeight: "700", cursor: submitting ? "not-allowed" : "pointer", opacity: submitting ? 0.6 : 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
-                  {submitting && <Loader2 size={16} className="animate-spin" />}
+                  {submitting && <Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} />}
                   {submitting ? "Screening..." : "Screen for Benefits"}
                 </button>
               </form>
@@ -152,7 +152,7 @@ export default function Dashboard() {
                   {assessments.map((a, i) => (
                     <tr key={i} style={{ borderBottom: "1px solid #E5E7EB" }}>
                       <td style={{ padding: "12px" }}>{new Date(a.created_at).toLocaleDateString()}</td>
-                      <td style={{ padding: "12px" }}>{a.state || "—"}</td>
+                      <td style={{ padding: "12px" }}>{a.state || "â€”"}</td>
                       <td style={{ padding: "12px" }}>{a.match_count ?? 0}</td>
                     </tr>
                   ))}
@@ -168,7 +168,7 @@ export default function Dashboard() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "16px" }}>
             <div style={{ background: apiStatus === "ok" ? "#F0FDF4" : "#FEF2F2", border: `1px solid ${apiStatus === "ok" ? "#86EFAC" : "#FECACA"}`, borderRadius: "8px", padding: "16px" }}>
               <div style={{ fontSize: "13px", color: "#6B7280", marginBottom: "4px" }}>Backend API</div>
-              <div style={{ fontSize: "16px", fontWeight: "800", color: apiStatus === "ok" ? "#059669" : "#DC2626" }}>{apiStatus === "ok" ? "✓ Online" : "✗ Offline"}</div>
+              <div style={{ fontSize: "16px", fontWeight: "800", color: apiStatus === "ok" ? "#059669" : "#DC2626" }}>{apiStatus === "ok" ? "âœ“ Online" : "âœ— Offline"}</div>
             </div>
           </div>
         )}
