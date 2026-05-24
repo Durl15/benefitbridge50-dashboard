@@ -10,6 +10,78 @@ const defaultForm = {
   utility_help_needed: false, consent_to_process: false,
 };
 
+function buildClientActionPlan(matches: any[], form: any) {
+  const highMatches = matches.filter((m: any) => m.confidence === "High");
+  const medMatches = matches.filter((m: any) => m.confidence === "Medium");
+  const allMatches = [...highMatches, ...medMatches, ...matches.filter((m: any) => m.confidence !== "High" && m.confidence !== "Medium")];
+
+  const programNames = allMatches.map((m: any) => m.program_name).join(", ");
+  const count = allMatches.length;
+
+  const summary = `Based on your screening, you may qualify for ${count} benefit program${count !== 1 ? "s" : ""}: ${programNames}. Follow the steps below to begin applying. Start with your highest-confidence matches first.`;
+
+  const checklist: string[] = [];
+
+  checklist.push("Gather your documents: government-issued photo ID, Social Security card, proof of income (pay stubs, award letters, or bank statements), and proof of address (utility bill or lease).");
+
+  if (form.medicare_status === "not_enrolled" || form.medicare_status === "approaching") {
+    checklist.push("Contact Social Security at 1-800-772-1213 or visit ssa.gov to enroll in Medicare Parts A and B. Enrollment windows have deadlines — act promptly to avoid late penalties.");
+  }
+
+  if (highMatches.length > 0) {
+    checklist.push(`Apply first for your highest-confidence matches: ${highMatches.map((m: any) => m.program_name).join(", ")}. These have the strongest eligibility indicators based on your profile.`);
+  }
+
+  if (form.food_insecurity) {
+    checklist.push("Apply for SNAP (food assistance) online at benefits.gov or at your local Department of Social Services. Bring income and household documentation.");
+  }
+
+  if (form.utility_help_needed) {
+    checklist.push("Apply for LIHEAP (utility assistance) through your state energy office. Visit liheap.acf.hhs.gov to find your local contact. Funds are limited and distributed seasonally.");
+  }
+
+  if (form.veteran_status) {
+    checklist.push("Contact your local VA office or call 1-800-827-1000 to review all VA benefits you may qualify for, including healthcare, pension, and caregiver support.");
+  }
+
+  if (form.disability_status) {
+    checklist.push("If not already enrolled, apply for SSI or SSDI at ssa.gov/benefits/disability or call 1-800-772-1213. Gather medical records and doctor contact information.");
+  }
+
+  if (form.housing_status === "rent_burdened" || form.housing_status === "risk_of_eviction" || form.housing_status === "unhoused") {
+    checklist.push("Contact your local housing authority or 211 (dial 2-1-1) for emergency rental assistance, Section 8 housing vouchers, and eviction prevention programs.");
+  }
+
+  checklist.push("Contact your local Area Agency on Aging (AAA) for personalized navigation help. Find yours at eldercare.acl.gov or call 1-800-677-1116 — this service is free.");
+
+  checklist.push("After applying, follow up with each agency within 2 weeks. Keep copies of all applications and note reference numbers and contact names.");
+
+  if (medMatches.length > 0) {
+    checklist.push(`Once your high-priority applications are submitted, apply for your medium-confidence matches: ${medMatches.map((m: any) => m.program_name).join(", ")}.`);
+  }
+
+  const official_links: Record<string, string>[] = [];
+  allMatches.forEach((m: any) => {
+    if (m.official_url) {
+      official_links.push({ [m.program_name]: m.official_url });
+    }
+  });
+  official_links.push({ "Benefits.gov (Federal Benefits Search)": "https://www.benefits.gov" });
+  official_links.push({ "Eldercare Locator (Find Local Help)": "https://eldercare.acl.gov" });
+  official_links.push({ "USA.gov Benefits for Older Adults": "https://www.usa.gov/benefits-for-older-adults" });
+
+  const fraud_warnings = [
+    "Government agencies never charge fees to apply for benefits. If anyone asks for payment to process your application, it is a scam.",
+    "Never share your Social Security number, bank account, or Medicare ID with unsolicited callers or door-to-door visitors.",
+    "Apply only through official .gov websites or in person at verified agency offices. Avoid third-party sites that charge for free government services.",
+    "If you suspect fraud, call the Senior Medicare Patrol at 1-877-808-2468 or report to the FTC at reportfraud.ftc.gov.",
+  ];
+
+  const disclaimer = "This action plan is generated from your screening responses and matched programs. It is a guide only and does not guarantee eligibility. Always verify requirements directly with each agency.";
+
+  return { summary, checklist, official_links, fraud_warnings, disclaimer, ai_generated: false };
+}
+
 export default function Dashboard() {
   const [activeNav, setActiveNav] = useState("screener");
   const [apiStatus, setApiStatus] = useState("loading");
@@ -86,16 +158,19 @@ export default function Dashboard() {
           language: "en",
         }),
       });
-      if (!res.ok) {
-        throw new Error("The action plan service is temporarily unavailable. Please try again shortly.");
+      if (res.ok) {
+        const data = await res.json();
+        if (!data.error) {
+          setActionPlan(data);
+          return;
+        }
       }
-      const data = await res.json();
-      if (data.error) {
-        throw new Error("The action plan service is temporarily unavailable. Please try again shortly.");
-      }
-      setActionPlan(data);
-    } catch (err: any) {
-      setPlanError(err.message || "Could not load action plan.");
+      // Backend unavailable — use client-side plan
+      const plan = buildClientActionPlan(screening.matches || [], form);
+      setActionPlan(plan);
+    } catch {
+      const plan = buildClientActionPlan(screening.matches || [], form);
+      setActionPlan(plan);
     } finally { setPlanLoading(false); }
   };
 
@@ -344,7 +419,7 @@ export default function Dashboard() {
                         <strong style={{ fontSize: "13px", color: "#0F2044", display: "block", marginBottom: "8px" }}>Your Application Checklist</strong>
                         <ol style={{ margin: 0, paddingLeft: "20px" }}>
                           {actionPlan.checklist.map((step: string, i: number) => (
-                            <li key={i} style={{ fontSize: "13px", color: "#374151", marginBottom: "6px", lineHeight: "1.5" }}>{step}</li>
+                            <li key={i} style={{ fontSize: "13px", color: "#374151", marginBottom: "8px", lineHeight: "1.6" }}>{step}</li>
                           ))}
                         </ol>
                       </div>
@@ -357,7 +432,7 @@ export default function Dashboard() {
                           {actionPlan.official_links.map((linkObj: Record<string, string>, i: number) =>
                             Object.entries(linkObj).map(([name, url]) => (
                               <a key={`${i}-${name}`} href={url} target="_blank" rel="noopener noreferrer"
-                                style={{ fontSize: "13px", color: "#2563EB", display: "flex", alignItems: "center", gap: "4px" }}>
+                                style={{ fontSize: "13px", color: "#2563EB" }}>
                                 {name}
                               </a>
                             ))
